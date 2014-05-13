@@ -73,47 +73,21 @@ class LoremIpsum
 
 	public function words($count = 1, $tags = false, $array = false)
 	{
-		$words = array();
+		$this->shuffle();
 
-		if ($this->first)
-		{
-			if ($count > 8)
-			{
-				$start  = 8;
-				$count -= 8;
-			}
-			else
-			{
-				$start = $count;
-				$count = 0;
-			}
+		$words = array_slice($this->words, 0, $count);
 
-			$words       = array_slice($this->words, 0, $start);
-			$this->first = false;
-		}
-
-		if ($count)
-		{
-			shuffle($this->words);
-			$words += array_slice($this->words, 0, $count);
-		}
-
-		if ($tags)
-		{
-			$this->markup($words, $tags);
-		}
-
-		if (!$array)
-		{
-			$words = implode(' ', $words);
-		}
-
-		return $words;
+		return $this->output($words, $tags, $array);
 	}
 
-	public function sentence()
+	public function sentence($tags = false)
 	{
+		return $this->sentences(1, $tags);
+	}
 
+	public function sentencesArray($count = 1, $tags = false)
+	{
+		return $this->sentences($count, $tags, true);
 	}
 
 	public function sentences()
@@ -121,14 +95,14 @@ class LoremIpsum
 
 	}
 
-	public function sentencesArray()
+	public function paragraph($tags = false)
 	{
-
+		return $this->paragraphs(1, $tags);
 	}
 
-	public function paragraph()
+	public function paragraphsArray($count = 1, $tags = false)
 	{
-
+		return $this->paragraphs($count, $tags, true);
 	}
 
 	public function paragraphs()
@@ -136,38 +110,62 @@ class LoremIpsum
 
 	}
 
-	public function paragraphsArray()
+	private function shuffle()
 	{
-
-	}
-
-	private function markup(&$strings, $tags)
-	{
-		if (!is_array($tags))
+		if ($this->first)
 		{
-			$tags = array($tags);
+			$this->first = array_slice($this->words, 0, 8);
+			$this->words = array_slice($this->words, 8);
+
+			shuffle($this->words);
+
+			$this->words = $this->first + $this->words;
+
+			$this->first = false;
 		}
 		else
 		{
-			$tags = array_reverse($tags);
+			shuffle($this->words);
 		}
+	}
 
-		foreach ($strings as $key => $string)
+	private function output($strings, $tags, $array)
+	{
+		if ($tags)
 		{
-			foreach ($tags as $tag)
+			if (!is_array($tags))
 			{
-				if ($tag[0] == '<')
-				{
-					$string = str_replace('$1', $string, $tag);
-				}
-				else
-				{
-					$string = sprintf('<%1$s>%2$s</%1$s>', $tag, $string);
-				}
+				$tags = array($tags);
+			}
+			else
+			{
+				$tags = array_reverse($tags);
+			}
 
-				$strings[$key] = $string;
+			foreach ($strings as $key => $string)
+			{
+				foreach ($tags as $tag)
+				{
+					if ($tag[0] == '<')
+					{
+						$string = str_replace('$1', $string, $tag);
+					}
+					else
+					{
+						$string = sprintf('<%1$s>%2$s</%1$s>', $tag, $string);
+					}
+
+					$strings[$key] = $string;
+				}
 			}
 		}
+
+		if (!$array)
+		{
+			$strings = implode(' ', $strings);
+		}
+
+		return $strings;
 	}
 }
 
