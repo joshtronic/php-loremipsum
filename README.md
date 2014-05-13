@@ -1,7 +1,7 @@
 php-loremipsum
 ==============
 
-Lorem ipsum generator without dependencies.
+Lorem ipsum generator in PHP without dependencies.
 
 Origins
 -------
@@ -9,6 +9,8 @@ Origins
 Once upon a time, I was attempting to find a lorem ipsum generator over on [Packagist](https://packagist.org/search/?q=lorem%20ipsum). I was presented with many options, and some of those options were good. Unfortunately, the bulk of those options depended on Symphony or the Zend Framework. This wouldn’t have been a big deal but under the circumstances, I wanted something that was not tightly coupled to these frameworks because I wanted to use the generator in my _own_ framework.
 
 I had decided to use [badcow/lorem-ipsum](https://packagist.org/packages/badcow/lorem-ipsum) because it did not have any dependencies nor did it rely on any external APIs. As I started to use the library, I found that I was going to have to fight with it to get it to do what I wanted. After digging through the code, I realized that I was going to end up gutting most of it to bend it to my will. I know when you overhaul someone’s code the liklihood of them accepting a pull request goes down dramatically, hence building this library while taking cues from it’s predecessor.
+
+Also, the aforementioned package had a bunch of “setter” and “getter” methods that were grossing me out :P
 
 Installation
 ------------
@@ -29,8 +31,8 @@ Usage
 ### Getting Started
 
 ```php
-require_once 'GravityBlvd/LoremIpsum.php';
-$lipsum = new GravityBlvd\LoremIpsum();
+require_once 'joshtronic/LoremIpsum.php';
+$lipsum = new joshtronic\LoremIpsum();
 ```
 
 ### Generating Words
@@ -99,6 +101,11 @@ print_r($lipsum->wordsArray(5), 'li');
 Assumptions
 -----------
 
-* The first sentence or paragraph will always start with “Lorem ipsum…”
-* Subsequent sentences and paragraphs will never start with “Lorem ipsum…”
-* Words will never contain “lorem” or “ipsum”
+Instead of having an option as to whether or not a string should start the generated output with “Lorem ipsum dolor sit amet, consectetur adipiscing elit.” a few assumptions are baked in. The first string generated will always start with the traditional “Lorem ipsum…”. Subsequent strings may contain those words but will not explicitly start with them.
+
+Contributing
+------------
+
+Suggestions and bug reports are always welcome, but karma points was earned for pull requests.
+
+Unit tests are required for all contributions. You can run the test suite from the `tests` directory simply by running `phpunit .`
