@@ -4,11 +4,11 @@ namespace joshtronic;
 
 class LoremIpsum
 {
-	private $first            = true;
-	private $sentence_mean    = 24.46;
-	private $sentence_stdev   = 5.08;
-	private $paragraph_mean   = 5.8;
-	private $paragraph_stdev  = 1.93;
+	private $first             = true;
+	private $sentence_mean     = 24.46;
+	private $sentence_std_dev  = 5.08;
+	private $paragraph_mean    = 5.8;
+	private $paragraph_std_dev = 1.93;
 
 	public $words = array(
 		// Lorem ipsum...
@@ -22,7 +22,7 @@ class LoremIpsum
 		'commodo',      'condimentum', 'congue',       'consequat',
 		'conubia',      'convallis',   'cras',         'cubilia',
 		'cum',          'curabitur',   'curae',        'cursus',
-		'dapibus',      'diam',        'dictum',       'dictumst', 
+		'dapibus',      'diam',        'dictum',       'dictumst',
 		'dignissim',    'dis',         'donec',        'dui',
 		'duis',         'egestas',     'eget',         'eleifend',
 		'elementum',    'enim',        'erat',         'eros',
@@ -71,6 +71,7 @@ class LoremIpsum
 		return $this->words($count, $tags, true);
 	}
 
+	// TODO Need to refactor to allow for counts larger than array of words
 	public function words($count = 1, $tags = false, $array = false)
 	{
 		$this->shuffle();
@@ -90,9 +91,18 @@ class LoremIpsum
 		return $this->sentences($count, $tags, true);
 	}
 
-	public function sentences()
+	public function sentences($count = 1, $tags = false, $array = false)
 	{
+		$sentences = array();
 
+		for ($i = 0; $i < $count; $i++)
+		{
+			$sentences[] = $this->wordsArray($this->gauss($this->sentence_mean, $this->sentence_std_dev));
+		}
+
+		$this->punctuate($sentences);
+
+		return $this->output($sentences, $tags, $array);
 	}
 
 	public function paragraph($tags = false)
@@ -105,9 +115,18 @@ class LoremIpsum
 		return $this->paragraphs($count, $tags, true);
 	}
 
-	public function paragraphs()
+	public function paragraphs($count = 1, $tags = false, $array = false)
 	{
 
+	}
+
+	private function gauss($mean, $std_dev)
+	{
+		$x = mt_rand() / mt_getrandmax();
+		$y = mt_rand() / mt_getrandmax();
+		$z = sqrt(-2 * log($x)) * cos(2 * pi() * $y);
+
+		return $z * $std_dev + $mean;
 	}
 
 	private function shuffle()
@@ -126,6 +145,33 @@ class LoremIpsum
 		else
 		{
 			shuffle($this->words);
+		}
+	}
+
+	private function punctuate(&$sentences)
+	{
+		foreach ($sentences as $key => $sentence)
+		{
+			$words = count($sentence);
+
+			if ($words > 4)
+			{
+				$mean    = log($words, 6);
+				$std_dev = $mean / 6;
+				$commas  = round($this->gauss($mean, $std_dev));
+
+				for ($i = 1; $i <= $commas; $i++)
+				{
+					$word = round($i * $words / ($commas + 1));
+
+					if ($word < ($words - 1) && $word > 0)
+					{
+						$sentence[$word] .= ',';
+					}
+				}
+
+				$sentences[$key] = ucfirst(implode(' ', $sentence) . '.');
+			}
 		}
 	}
 

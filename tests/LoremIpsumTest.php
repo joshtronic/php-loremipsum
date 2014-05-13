@@ -36,7 +36,6 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
-	/*
 	public function testSentence()
 	{
 		$this->assertRegExp('/^[a-z, ]+\.$/i', $this->lipsum->sentence());
@@ -53,12 +52,13 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(is_array($sentences));
 		$this->assertCount(3, $sentences);
 
-		foreach ($words as $word)
+		foreach ($sentences as $sentence)
 		{
 			$this->assertRegExp('/^[a-z, ]+\.$/i', $sentence);
 		}
 	}
 
+	/*
 	public function testParagraph()
 	{
 
@@ -102,7 +102,6 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
-	/*
 	public function testMarkupArrayReturn()
 	{
 		$words = $this->lipsum->wordsArray(3, 'li');
@@ -114,7 +113,6 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 			$this->assertRegExp('/^<li>[a-z]+<\/li>$/i', $word);
 		}
 	}
-	*/
 }
 
 ?>
