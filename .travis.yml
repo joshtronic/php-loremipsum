@@ -23,4 +23,4 @@ script:
   - phpunit --colors --coverage-clover /home/travis/build/joshtronic/php-loremipsum/build/logs/clover.xml .
 
 after_success:
-  - php vendor/bin/coveralls --config ../.coveralls.yml -v
+  - php ../vendor/bin/coveralls --config ../.coveralls.yml -v

@@ -3,7 +3,7 @@
 /**
  * Lorem Ipsum Generator
  *
- * PHP version 5
+ * PHP version 5.3+
  *
  * Licensed under The MIT License.
  * Redistribution of these files must retain the above copyright notice.

@@ -1,6 +1,6 @@
 # php-loremipsum [![Build Status](https://travis-ci.org/joshtronic/php-loremipsum.svg)](https://travis-ci.org/joshtronic/php-loremipsum) [![Coverage Status](https://coveralls.io/repos/joshtronic/php-loremipsum/badge.png)](https://coveralls.io/r/joshtronic/php-loremipsum)
 
-Lorem ipsum generator in PHP without dependencies.
+Lorem ipsum generator in PHP without dependencies. Compatible with PHP 5.3+ as well as HHVM.
 
 ## Origins
 
