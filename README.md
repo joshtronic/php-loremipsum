@@ -1,10 +1,8 @@
-php-loremipsum
-==============
+# php-loremipsum [![Build Status](https://travis-ci.org/joshtronic/php-loremipsum.svg)](https://travis-ci.org/joshtronic/php-loremipsum)
 
 Lorem ipsum generator in PHP without dependencies.
 
-Origins
--------
+## Origins
 
 Once upon a time, I was attempting to find a lorem ipsum generator over on [Packagist](https://packagist.org/search/?q=lorem%20ipsum). I was presented with many options, and some of those options were good. Unfortunately, the bulk of those options depended on Symphony or the Zend Framework. This wouldn’t have been a big deal but under the circumstances, I wanted something that was not tightly coupled to these frameworks because I wanted to use the generator in my _own_ framework.
 
@@ -12,8 +10,7 @@ I had decided to use [badcow/lorem-ipsum](https://packagist.org/packages/badcow/
 
 Also, the aforementioned package had a bunch of “setter” and “getter” methods that were grossing me out :P
 
-Installation
-------------
+## Installation
 
 The preferred installation method is via `composer`. First add the following to your `composer.json`
 
@@ -25,8 +22,7 @@ The preferred installation method is via `composer`. First add the following to 
 
 Then run `composer update`
 
-Usage
------
+## Usage
 
 ### Getting Started
 
@@ -98,13 +94,11 @@ You can still wrap with markup when returning an array:
 print_r($lipsum->wordsArray(5), 'li');
 ```
 
-Assumptions
------------
+## Assumptions
 
 Instead of having an option as to whether or not a string should start the generated output with “Lorem ipsum dolor sit amet, consectetur adipiscing elit.” a few assumptions are baked in. The first string generated will always start with the traditional “Lorem ipsum…”. Subsequent strings may contain those words but will not explicitly start with them.
 
-Contributing
-------------
+## Contributing
 
 Suggestions and bug reports are always welcome, but karma points was earned for pull requests.
 
