@@ -100,6 +100,6 @@ Instead of having an option as to whether or not a string should start the gener
 
 ## Contributing
 
-Suggestions and bug reports are always welcome, but karma points was earned for pull requests.
+Suggestions and bug reports are always welcome, but karma points are earned for pull requests.
 
 Unit tests are required for all contributions. You can run the test suite from the `tests` directory simply by running `phpunit .`
