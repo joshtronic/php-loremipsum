@@ -1,0 +1,16 @@
+{
+	"name":        "joshtronic/php-loremipsum",
+	"description": "Lorem ipsum generator in PHP without dependencies",
+	"license":     "MIT",
+	"authors": [{
+		"name":     "Josh Sherman",
+		"email":    "josh@gravityblvd.com",
+		"homepage": "https://github.com/joshtronic/php-loremipsum"
+	}],
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"require-dev": {
+		"satooshi/php-coveralls": "dev-master"
+	},
+}
