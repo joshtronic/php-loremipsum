@@ -36,6 +36,11 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
+	public function testWordsExceedingVocab()
+	{
+		$this->assertCount(500, $this->lipsum->wordsArray(500));
+	}
+
 	public function testSentence()
 	{
 		$this->assertRegExp('/^[a-z, ]+\.$/i', $this->lipsum->sentence());
@@ -58,25 +63,30 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
-	/*
 	public function testParagraph()
 	{
-
-		$this->fail('Not yet implemented.');
+		$this->assertRegExp('/^([a-z, ]+\.)+$/i', $this->lipsum->paragraph());
 	}
 
 	public function testParagraphs()
 	{
-
-		$this->fail('Not yet implemented.');
+		$this->assertRegExp(
+			'/^([a-z, ]+\.)+\n\n([a-z, ]+\.)+\n\n([a-z, ]+\.)+$/i',
+			$this->lipsum->paragraphs(3)
+		);
 	}
 
 	public function testParagraphsArray()
 	{
+		$paragraphs = $this->lipsum->paragraphsArray(3);
+		$this->assertTrue(is_array($paragraphs));
+		$this->assertCount(3, $paragraphs);
 
-		$this->fail('Not yet implemented.');
+		foreach ($paragraphs as $paragraph)
+		{
+			$this->assertRegExp('/^([a-z, ]+\.)+$/i', $paragraph);
+		}
 	}
-	*/
 
 	public function testMarkupString()
 	{
