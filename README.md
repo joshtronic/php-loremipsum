@@ -54,7 +54,6 @@ Then run `composer update`
 ### Getting Started
 
 ```php
-require_once 'joshtronic/LoremIpsum.php';
 $lipsum = new joshtronic\LoremIpsum();
 ```
 
