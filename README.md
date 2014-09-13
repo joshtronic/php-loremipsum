@@ -34,7 +34,7 @@ request goes down dramatically, hence building this library while taking cues
 from it’s predecessor.
 
 Also, the aforementioned package had a bunch of “setter” and “getter” methods
-that were grossing me out :P
+that were grossing me out :scream:
 
 ## Installation
 
