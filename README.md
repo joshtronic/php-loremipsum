@@ -43,7 +43,7 @@ to your `composer.json`
 
 ```json
 "require": {
-    "joshtronic/php-loremipsum": "dev-master"
+    "joshtronic/php-loremipsum": "1.0.*"
 }
 ```
 
