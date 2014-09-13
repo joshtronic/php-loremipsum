@@ -1,6 +1,9 @@
 {
     "name":        "joshtronic/php-loremipsum",
     "description": "Lorem ipsum generator in PHP without dependencies",
+    "version":     "1.0.0",
+    "type":        "library",
+    "keywords":    ["lorem", "ipsum", "generator"],
     "homepage":    "https://github.com/joshtronic/php-loremipsum",
     "license":     "MIT",
     "authors": [{
