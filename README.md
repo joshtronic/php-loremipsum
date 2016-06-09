@@ -3,12 +3,10 @@
 [![Build Status](http://img.shields.io/travis/joshtronic/php-loremipsum.svg?style=flat)][travis]
 [![Coverage Status](http://img.shields.io/coveralls/joshtronic/php-loremipsum.svg?style=flat)][coveralls]
 [![Downloads](http://img.shields.io/packagist/dt/joshtronic/php-loremipsum.svg?style=flat)][packagist]
-[![Gittip](http://img.shields.io/gittip/joshtronic.svg?style=flat)][gittip]
 
 [travis]:    http://travis-ci.org/joshtronic/php-loremipsum
 [coveralls]: https://coveralls.io/r/joshtronic/php-loremipsum
 [packagist]: https://packagist.org/packages/joshtronic/php-loremipsum
-[gittip]:    https://www.gittip.com/joshtronic/
 
 Lorem ipsum generator in PHP without dependencies. Compatible with PHP 5.3+ as
 well as HHVM.
