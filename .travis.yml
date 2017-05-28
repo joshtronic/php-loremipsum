@@ -23,7 +23,5 @@ script:
   - phpunit --colors --coverage-clover ../build/logs/clover.xml .
 
 after_success:
-  - ls -al ../build/logs
-  - cat ../build/logs/clover.xml
   - cd ..
   - php vendor/bin/coveralls --config .coveralls.yml -v
