@@ -112,7 +112,7 @@ print_r($lipsum->paragraphsArray(5));
 You can still wrap with markup when returning an array:
 
 ```php
-print_r($lipsum->wordsArray(5), 'li');
+print_r($lipsum->wordsArray(5, 'li'));
 ```
 
 ## Assumptions
