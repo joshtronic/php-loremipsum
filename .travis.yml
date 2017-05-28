@@ -15,8 +15,6 @@ matrix:
   include:
     - php: nightly
       env: ALLOW_FAILURE=1
-    - php: hhvm
-      env: ALLOW_FAILURE=1
     - php: hhvm-nightly
       env: ALLOW_FAILURE=1
   allow_failures:
