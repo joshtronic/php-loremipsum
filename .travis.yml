@@ -12,9 +12,7 @@ matrix:
     - php: 7.0
     - php: 7.1
     - php: hhvm-3.3
-      dist: precise
     - php: hhvm-3.6
-      dist: precise
     - php: hhvm-3.9
     - php: hhvm-3.12
     - php: hhvm-3.15
