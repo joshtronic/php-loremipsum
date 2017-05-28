@@ -2,6 +2,10 @@
 
 require_once '../src/LoremIpsum.php';
 
+if (!class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')) {
+    class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
+}
+
 class LoremIpsumTest extends PHPUnit_Framework_TestCase
 {
     private $lipsum;
