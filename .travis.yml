@@ -17,11 +17,13 @@ install:
 
 before_script:
   - mkdir -p build/logs
+  - ls -al
   - cd tests
-  - phpunit --version
 
 script:
   - phpunit --colors --coverage-clover /home/travis/build/joshtronic/php-loremipsum/build/logs/clover.xml .
 
 after_success:
+  - ls -al ../
+  - ls -al ../build/logs
   - php ../vendor/bin/coveralls --config ../.coveralls.yml -v
