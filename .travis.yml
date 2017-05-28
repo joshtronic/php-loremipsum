@@ -16,6 +16,7 @@ install:
   - composer install
 
 before_script:
+  - pwd
   - mkdir -p build/logs
   - ls -al
   - cd tests
