@@ -1,6 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
 require_once '../src/LoremIpsum.php';
 
 class LoremIpsumTest extends PHPUnit_Framework_TestCase
