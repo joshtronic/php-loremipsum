@@ -2,7 +2,17 @@
 
 require_once '../src/LoremIpsum.php';
 
-if (!class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')) {
+if (
+    !class_exists('\PHPUnit_Framework_Error')
+    && class_exists('\PHPUnit\Framework\Error')
+) {
+    class_alias('\PHPUnit\Framework\Error', '\PHPUnit_Framework_Error');
+}
+
+if (
+    !class_exists('\PHPUnit_Framework_TestCase')
+    && class_exists('\PHPUnit\Framework\TestCase')
+) {
     class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
 }
 
@@ -34,8 +44,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($words));
         $this->assertCount(3, $words);
 
-        foreach ($words as $word)
-        {
+        foreach ($words as $word) {
             $this->assertRegExp('/^[a-z]+$/i', $word);
         }
     }
@@ -61,8 +70,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($sentences));
         $this->assertCount(3, $sentences);
 
-        foreach ($sentences as $sentence)
-        {
+        foreach ($sentences as $sentence) {
             $this->assertRegExp('/^[a-z, ]+\.$/i', $sentence);
         }
     }
@@ -86,8 +94,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($paragraphs));
         $this->assertCount(3, $paragraphs);
 
-        foreach ($paragraphs as $paragraph)
-        {
+        foreach ($paragraphs as $paragraph) {
             $this->assertRegExp('/^([a-z, ]+\.)+$/i', $paragraph);
         }
     }
@@ -122,8 +129,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($words));
         $this->assertCount(3, $words);
 
-        foreach ($words as $word)
-        {
+        foreach ($words as $word) {
             $this->assertRegExp('/^<li>[a-z]+<\/li>$/i', $word);
         }
     }
