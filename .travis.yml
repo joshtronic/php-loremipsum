@@ -1,9 +1,6 @@
 language: php
 dist: trusty
 sudo: required
-env:
-  - HHVM=false
-  - PHPUNIT=phpunit
 
 matrix:
   include:
@@ -16,9 +13,7 @@ matrix:
     - php: 7.1
     - php: 7.2
     - php: hhvm
-      env:
-        - HHVM=true
-        - PHPUNIT=./vendor/bin/phpunit
+      env: HHVM=true
 
 install:
   - composer install
@@ -29,7 +24,9 @@ before_script:
   - cd tests
 
 script:
-  - $PHPUNIT --colors --coverage-clover ../build/logs/clover.xml .
+  - if [[ $HHVM == true ]]; then ./vendor/bin/phpunit --colors --coverage-clover ../build/logs/clover.xml .; fi
+  - if [[ $HHVM != true ]]; then phpunit --colors --coverage-clover ../build/logs/clover.xml .; fi
+
 
 after_success:
   - cd ..
