@@ -3,13 +3,6 @@
 require_once '../src/LoremIpsum.php';
 
 if (
-    !class_exists('\PHPUnit_Framework_Error')
-    && class_exists('\PHPUnit\Framework\Error')
-) {
-    class_alias('\PHPUnit\Framework\Error', '\PHPUnit_Framework_Error');
-}
-
-if (
     !class_exists('\PHPUnit_Framework_TestCase')
     && class_exists('\PHPUnit\Framework\TestCase')
 ) {
