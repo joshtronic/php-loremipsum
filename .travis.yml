@@ -11,16 +11,22 @@ matrix:
     - php: 5.6
     - php: 7.0
     - php: 7.1
+    - php: 7.2
+    - php: hhvm
+      env: HHVM=true
 
 install:
   - composer install
+  - if [[ $HHVM == true ]]; then composer require "phpunit/phpunit:5.7"; fi
 
 before_script:
   - mkdir -p build/logs
   - cd tests
 
 script:
-  - phpunit --colors --coverage-clover ../build/logs/clover.xml .
+  - if [[ $HHVM == true ]]; then ../vendor/bin/phpunit --colors --coverage-clover ../build/logs/clover.xml .; fi
+  - if [[ $HHVM != true ]]; then phpunit --colors --coverage-clover ../build/logs/clover.xml .; fi
+
 
 after_success:
   - cd ..
