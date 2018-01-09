@@ -27,7 +27,6 @@ script:
   - if [[ $HHVM == true ]]; then ../vendor/bin/phpunit --colors --coverage-clover ../build/logs/clover.xml .; fi
   - if [[ $HHVM != true ]]; then phpunit --colors --coverage-clover ../build/logs/clover.xml .; fi
 
-
 after_success:
   - cd ..
   - php vendor/bin/coveralls --config .coveralls.yml -v
