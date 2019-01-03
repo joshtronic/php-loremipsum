@@ -31,7 +31,7 @@ before_script:
 
 script:
   - |
-    if [[ $PHPUNIT57 == 5.7 ]]; then
+    if [[ $PHPUNIT == 5.7 ]]; then
       ../vendor/bin/phpunit --colors --coverage-clover ../build/logs/clover.xml .
     else
       phpunit --colors --coverage-clover ../build/logs/clover.xml .
