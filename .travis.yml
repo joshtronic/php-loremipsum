@@ -14,6 +14,7 @@ matrix:
       dist: trusty
     - php: 7.0
       dist: xenial
+      env: PHPUNIT=5.7
     - php: 7.1
     - php: 7.2
     - php: 7.3
