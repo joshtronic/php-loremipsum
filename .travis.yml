@@ -19,7 +19,7 @@ matrix:
     - php: 7.2
     - php: 7.3
     - php: hhvm
-      dist: trusty
+      dist: xenial
       env: PHPUNIT=5.7
 
 install:
