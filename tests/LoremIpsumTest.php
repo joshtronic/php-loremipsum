@@ -1,6 +1,5 @@
 <?php
-
-require_once '../src/LoremIpsum.php';
+require_once './src/LoremIpsum.php';
 
 if (
     !class_exists('\PHPUnit_Framework_TestCase')
@@ -11,29 +10,25 @@ if (
 
 class LoremIpsumTest extends PHPUnit_Framework_TestCase
 {
-    private $lipsum;
-
-    public function setUp()
-    {
-        $this->lipsum = new joshtronic\LoremIpsum();
-    }
-
     public function testWord()
     {
-        $this->assertRegExp('/^[a-z]+$/i', $this->lipsum->word());
+        $lipsum = new joshtronic\LoremIpsum();
+        $this->assertRegExp('/^[a-z]+$/i', $lipsum->word());
     }
 
     public function testWords()
     {
+        $lipsum = new joshtronic\LoremIpsum();
         $this->assertRegExp(
             '/^[a-z]+ [a-z]+ [a-z]+$/i',
-            $this->lipsum->words(3)
+            $lipsum->words(3)
         );
     }
 
     public function testWordsArray()
     {
-        $words = $this->lipsum->wordsArray(3);
+        $lipsum = new joshtronic\LoremIpsum();
+        $words = $lipsum->wordsArray(3);
         $this->assertTrue(is_array($words));
         $this->assertCount(3, $words);
 
@@ -44,22 +39,29 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 
     public function testWordsExceedingVocab()
     {
-        $this->assertCount(500, $this->lipsum->wordsArray(500));
+        $lipsum = new joshtronic\LoremIpsum();
+        $this->assertCount(500, $lipsum->wordsArray(500));
     }
 
     public function testSentence()
     {
-        $this->assertRegExp('/^[a-z, ]+\.$/i', $this->lipsum->sentence());
+        $lipsum = new joshtronic\LoremIpsum();
+        $this->assertRegExp('/^[a-z, ]+\.$/i', $lipsum->sentence());
     }
 
     public function testSentences()
     {
-        $this->assertRegExp('/^[a-z, ]+\. [a-z, ]+\. [a-z, ]+\.$/i', $this->lipsum->sentences(3));
+        $lipsum = new joshtronic\LoremIpsum();
+        $this->assertRegExp(
+            '/^[a-z, ]+\. [a-z, ]+\. [a-z, ]+\.$/i',
+            $lipsum->sentences(3)
+        );
     }
 
     public function testSentencesArray()
     {
-        $sentences = $this->lipsum->sentencesArray(3);
+        $lipsum = new joshtronic\LoremIpsum();
+        $sentences = $lipsum->sentencesArray(3);
         $this->assertTrue(is_array($sentences));
         $this->assertCount(3, $sentences);
 
@@ -70,20 +72,23 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 
     public function testParagraph()
     {
-        $this->assertRegExp('/^([a-z, ]+\.)+$/i', $this->lipsum->paragraph());
+        $lipsum = new joshtronic\LoremIpsum();
+        $this->assertRegExp('/^([a-z, ]+\.)+$/i', $lipsum->paragraph());
     }
 
     public function testParagraphs()
     {
+        $lipsum = new joshtronic\LoremIpsum();
         $this->assertRegExp(
             '/^([a-z, ]+\.)+\n\n([a-z, ]+\.)+\n\n([a-z, ]+\.)+$/i',
-            $this->lipsum->paragraphs(3)
+            $lipsum->paragraphs(3)
         );
     }
 
     public function testParagraphsArray()
     {
-        $paragraphs = $this->lipsum->paragraphsArray(3);
+        $lipsum = new joshtronic\LoremIpsum();
+        $paragraphs = $lipsum->paragraphsArray(3);
         $this->assertTrue(is_array($paragraphs));
         $this->assertCount(3, $paragraphs);
 
@@ -94,31 +99,35 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
 
     public function testMarkupString()
     {
+        $lipsum = new joshtronic\LoremIpsum();
         $this->assertRegExp(
             '/^<li>[a-z]+<\/li>$/i',
-            $this->lipsum->word('li')
+            $lipsum->word('li')
         );
     }
 
     public function testMarkupArray()
     {
+        $lipsum = new joshtronic\LoremIpsum();
         $this->assertRegExp(
             '/^<div><p>[a-z]+<\/p><\/div>$/i',
-            $this->lipsum->word(array('div', 'p'))
+            $lipsum->word(array('div', 'p'))
         );
     }
 
     public function testMarkupBackReference()
     {
+        $lipsum = new joshtronic\LoremIpsum();
         $this->assertRegExp(
             '/^<li><a href="[a-z]+">[a-z]+<\/a><\/li>$/i',
-            $this->lipsum->word('<li><a href="$1">$1</a></li>')
+            $lipsum->word('<li><a href="$1">$1</a></li>')
         );
     }
 
     public function testMarkupArrayReturn()
     {
-        $words = $this->lipsum->wordsArray(3, 'li');
+        $lipsum = new joshtronic\LoremIpsum();
+        $words = $lipsum->wordsArray(3, 'li');
         $this->assertTrue(is_array($words));
         $this->assertCount(3, $words);
 

@@ -9,7 +9,7 @@
  * Redistribution of these files must retain the above copyright notice.
  *
  * @author    Josh Sherman <hello@joshtronic.com>
- * @copyright Copyright 2014, 2015, 2016, 2017, 2018, 2019 Josh Sherman
+ * @copyright Copyright 2014, 2015, 2016, 2017, 2018, 2019, 2020 Josh Sherman
  * @license   http://www.opensource.org/licenses/mit-license.html
  * @link      https://github.com/joshtronic/php-loremipsum
  */
