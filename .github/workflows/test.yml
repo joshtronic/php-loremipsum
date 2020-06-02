@@ -1,0 +1,29 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    name: Test PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4']
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+    - name: PHP Version
+      run: php --version
+    - name: Composer Version
+      run: composer --version
+    - name: Install Dependencies
+      run: COMPOSER_MEMORY_LIMIT=-1 composer install
+    - name: Run Tests
+      run: vendor/bin/phpunit --coverage-clover ./coverage.xml
+    - name: Upload Coverage
+      if: ${{ matrix.php-version == '7.4' }}
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
