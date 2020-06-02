@@ -2,8 +2,8 @@
 
 [![License](https://img.shields.io/packagist/l/joshtronic/php-loremipsum?style=for-the-badge)](https://github.com/joshtronic/php-loremipsum/blob/master/LICENSE)
 ![PHP Version](https://img.shields.io/packagist/php-v/joshtronic/php-loremipsum?style=for-the-badge)
-[![Build Status](https://img.shields.io/travis/joshtronic/php-loremipsum/master?style=for-the-badge)](https://travis-ci.org/joshtronic/php-loremipsum)
-[![Coverage Status](https://img.shields.io/coveralls/github/joshtronic/php-loremipsum/master?style=for-the-badge)](https://coveralls.io/github/joshtronic/php-loremipsum?branch=master)
+[![Test Status](https://img.shields.io/github/workflow/status/joshtronic/php-loremipsum/Test?style=for-the-badge)](https://github.com/joshtronic/php-loremipsum/actions)
+[![Code Coverage](https://img.shields.io/codecov/c/github/joshtronic/php-loremipsum?style=for-the-badge)](https://codecov.io/gh/joshtronic/php-loremipsum)
 [![Monthly Downloads](https://img.shields.io/packagist/dm/joshtronic/php-loremipsum?style=for-the-badge)](https://packagist.org/packages/joshtronic/php-loremipsum)
 
 Lorem ipsum generator in PHP without dependencies. Compatible with PHP 5.3+.
