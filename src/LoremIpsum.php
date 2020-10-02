@@ -37,7 +37,7 @@ class LoremIpsum
      * @access private
      * @var    array
      */
-    private $words = array(
+    public $words = array(
         // Lorem ipsum...
         'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
 
