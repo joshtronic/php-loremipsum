@@ -10,22 +10,42 @@ if (
 
 class LoremIpsumTest extends PHPUnit_Framework_TestCase
 {
-    public function testWord()
-    {
-        $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp('/^[a-z]+$/i', $lipsum->word());
+    /**
+     * @doesNotPerformAssertions
+     */
+    public function testAssertRegExp() {
+        if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
+            return 'assertMatchesRegularExpression';
+        }
+
+        return 'assertRegExp';
     }
 
-    public function testWords()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testWord($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp(
+        $this->$assertRegExp('/^[a-z]+$/i', $lipsum->word());
+    }
+
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testWords($assertRegExp)
+    {
+        $lipsum = new joshtronic\LoremIpsum();
+        $this->$assertRegExp(
             '/^[a-z]+ [a-z]+ [a-z]+$/i',
             $lipsum->words(3)
         );
     }
 
-    public function testWordsArray()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testWordsArray($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
         $words = $lipsum->wordsArray(3);
@@ -33,32 +53,44 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertCount(3, $words);
 
         foreach ($words as $word) {
-            $this->assertRegExp('/^[a-z]+$/i', $word);
+            $this->$assertRegExp('/^[a-z]+$/i', $word);
         }
     }
 
-    public function testWordsExceedingVocab()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testWordsExceedingVocab($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
         $this->assertCount(500, $lipsum->wordsArray(500));
     }
 
-    public function testSentence()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testSentence($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp('/^[a-z, ]+\.$/i', $lipsum->sentence());
+        $this->$assertRegExp('/^[a-z, ]+\.$/i', $lipsum->sentence());
     }
 
-    public function testSentences()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testSentences($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp(
+        $this->$assertRegExp(
             '/^[a-z, ]+\. [a-z, ]+\. [a-z, ]+\.$/i',
             $lipsum->sentences(3)
         );
     }
 
-    public function testSentencesArray()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testSentencesArray($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
         $sentences = $lipsum->sentencesArray(3);
@@ -66,26 +98,35 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertCount(3, $sentences);
 
         foreach ($sentences as $sentence) {
-            $this->assertRegExp('/^[a-z, ]+\.$/i', $sentence);
+            $this->$assertRegExp('/^[a-z, ]+\.$/i', $sentence);
         }
     }
 
-    public function testParagraph()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testParagraph($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp('/^([a-z, ]+\.)+$/i', $lipsum->paragraph());
+        $this->$assertRegExp('/^([a-z, ]+\.)+$/i', $lipsum->paragraph());
     }
 
-    public function testParagraphs()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testParagraphs($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp(
+        $this->$assertRegExp(
             '/^([a-z, ]+\.)+\n\n([a-z, ]+\.)+\n\n([a-z, ]+\.)+$/i',
             $lipsum->paragraphs(3)
         );
     }
 
-    public function testParagraphsArray()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testParagraphsArray($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
         $paragraphs = $lipsum->paragraphsArray(3);
@@ -93,38 +134,50 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertCount(3, $paragraphs);
 
         foreach ($paragraphs as $paragraph) {
-            $this->assertRegExp('/^([a-z, ]+\.)+$/i', $paragraph);
+            $this->$assertRegExp('/^([a-z, ]+\.)+$/i', $paragraph);
         }
     }
 
-    public function testMarkupString()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testMarkupString($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp(
+        $this->$assertRegExp(
             '/^<li>[a-z]+<\/li>$/i',
             $lipsum->word('li')
         );
     }
 
-    public function testMarkupArray()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testMarkupArray($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp(
+        $this->$assertRegExp(
             '/^<div><p>[a-z]+<\/p><\/div>$/i',
             $lipsum->word(array('div', 'p'))
         );
     }
 
-    public function testMarkupBackReference()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testMarkupBackReference($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
-        $this->assertRegExp(
+        $this->$assertRegExp(
             '/^<li><a href="[a-z]+">[a-z]+<\/a><\/li>$/i',
             $lipsum->word('<li><a href="$1">$1</a></li>')
         );
     }
 
-    public function testMarkupArrayReturn()
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testMarkupArrayReturn($assertRegExp)
     {
         $lipsum = new joshtronic\LoremIpsum();
         $words = $lipsum->wordsArray(3, 'li');
@@ -132,7 +185,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
         $this->assertCount(3, $words);
 
         foreach ($words as $word) {
-            $this->assertRegExp('/^<li>[a-z]+<\/li>$/i', $word);
+            $this->$assertRegExp('/^<li>[a-z]+<\/li>$/i', $word);
         }
     }
 }
