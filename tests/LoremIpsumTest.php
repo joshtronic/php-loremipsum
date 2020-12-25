@@ -1,14 +1,9 @@
 <?php
-require_once './src/LoremIpsum.php';
+namespace joshtronic\Tests;
+use joshtronic\LoremIpsum;
+use PHPUnit\Framework\TestCase;
 
-if (
-    !class_exists('\PHPUnit_Framework_TestCase')
-    && class_exists('\PHPUnit\Framework\TestCase')
-) {
-    class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
-}
-
-class LoremIpsumTest extends PHPUnit_Framework_TestCase
+class LoremIpsumTest extends TestCase
 {
     /**
      * @doesNotPerformAssertions
@@ -26,7 +21,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testWord($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp('/^[a-z]+$/i', $lipsum->word());
     }
 
@@ -35,7 +30,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testWords($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp(
             '/^[a-z]+ [a-z]+ [a-z]+$/i',
             $lipsum->words(3)
@@ -47,7 +42,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testWordsArray($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $words = $lipsum->wordsArray(3);
         $this->assertTrue(is_array($words));
         $this->assertCount(3, $words);
@@ -62,7 +57,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testWordsExceedingVocab($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->assertCount(500, $lipsum->wordsArray(500));
     }
 
@@ -71,7 +66,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testSentence($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp('/^[a-z, ]+\.$/i', $lipsum->sentence());
     }
 
@@ -80,7 +75,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testSentences($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp(
             '/^[a-z, ]+\. [a-z, ]+\. [a-z, ]+\.$/i',
             $lipsum->sentences(3)
@@ -92,7 +87,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testSentencesArray($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $sentences = $lipsum->sentencesArray(3);
         $this->assertTrue(is_array($sentences));
         $this->assertCount(3, $sentences);
@@ -107,7 +102,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testParagraph($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp('/^([a-z, ]+\.)+$/i', $lipsum->paragraph());
     }
 
@@ -116,7 +111,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testParagraphs($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp(
             '/^([a-z, ]+\.)+\n\n([a-z, ]+\.)+\n\n([a-z, ]+\.)+$/i',
             $lipsum->paragraphs(3)
@@ -128,7 +123,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testParagraphsArray($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $paragraphs = $lipsum->paragraphsArray(3);
         $this->assertTrue(is_array($paragraphs));
         $this->assertCount(3, $paragraphs);
@@ -143,7 +138,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testMarkupString($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp(
             '/^<li>[a-z]+<\/li>$/i',
             $lipsum->word('li')
@@ -155,7 +150,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testMarkupArray($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp(
             '/^<div><p>[a-z]+<\/p><\/div>$/i',
             $lipsum->word(array('div', 'p'))
@@ -167,7 +162,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testMarkupBackReference($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $this->$assertRegExp(
             '/^<li><a href="[a-z]+">[a-z]+<\/a><\/li>$/i',
             $lipsum->word('<li><a href="$1">$1</a></li>')
@@ -179,7 +174,7 @@ class LoremIpsumTest extends PHPUnit_Framework_TestCase
      */
     public function testMarkupArrayReturn($assertRegExp)
     {
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new LoremIpsum();
         $words = $lipsum->wordsArray(3, 'li');
         $this->assertTrue(is_array($words));
         $this->assertCount(3, $words);
