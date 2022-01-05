@@ -9,7 +9,7 @@
  * Redistribution of these files must retain the above copyright notice.
  *
  * @author    Josh Sherman <hello@joshtronic.com>
- * @copyright Copyright 2014, 2015, 2016, 2017, 2018, 2019, 2020 Josh Sherman
+ * @copyright Copyright 2014-2022 Josh Sherman
  * @license   http://www.opensource.org/licenses/mit-license.html
  * @link      https://github.com/joshtronic/php-loremipsum
  */
@@ -351,11 +351,13 @@ class LoremIpsum
 
             foreach ($strings as $key => $string) {
                 foreach ($tags as $tag) {
-                    // Detects / applies back reference
-                    if ($tag[0] == '<') {
-                        $string = str_replace('$1', $string, $tag);
-                    } else {
-                        $string = sprintf('<%1$s>%2$s</%1$s>', $tag, $string);
+                    if (is_string($tag)) {
+                        // Detects / applies back reference
+                        if ($tag[0] == '<') {
+                            $string = str_replace('$1', $string, $tag);
+                        } else {
+                            $string = sprintf('<%1$s>%2$s</%1$s>', $tag, $string);
+                        }
                     }
 
                     $strings[$key] = $string;

@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
+        php-version: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
     - name: Run Tests
       run: vendor/bin/phpunit --coverage-clover ./coverage.xml
     - name: Upload Coverage
-      if: ${{ matrix.php-version == '7.4' }}
+      if: ${{ matrix.php-version == '8.1' }}
       uses: codecov/codecov-action@v1
       with:
         file: ./coverage.xml
