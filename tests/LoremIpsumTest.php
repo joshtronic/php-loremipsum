@@ -183,5 +183,16 @@ class LoremIpsumTest extends TestCase
             $this->$assertRegExp('/^<li>[a-z]+<\/li>$/i', $word);
         }
     }
+
+    /**
+     * @depends testAssertRegExp
+     */
+    public function testSkipNonStringTag($assertRegExp)
+    {
+        $lipsum = new LoremIpsum();
+        $this->$assertRegExp('/^[a-z]+$/i', $lipsum->word(123));
+        $this->$assertRegExp('/^[a-z]+$/i', $lipsum->word(array(1, 2, 3)));
+        $this->$assertRegExp('/^[a-z]+$/i', $lipsum->word(true));
+    }
 }
 
