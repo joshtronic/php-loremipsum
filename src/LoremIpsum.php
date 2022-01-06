@@ -114,6 +114,7 @@ class LoremIpsum
      */
     public function words($count = 1, $tags = false, $array = false)
     {
+        $count      = (int) $count;
         $words      = array();
         $word_count = 0;
 
