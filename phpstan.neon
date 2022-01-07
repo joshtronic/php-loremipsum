@@ -1,0 +1,14 @@
+parameters:
+
+    paths:
+        - src
+
+    # The level 8 is the highest level
+    level: max
+
+    excludePaths:
+        - ./*/*/FileToBeExcluded.php
+
+    checkMissingIterableValueType: true
+
+    #editorUrl: 'vscode://file/%%file%%:%%line%%'
