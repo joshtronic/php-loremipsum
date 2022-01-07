@@ -24,7 +24,7 @@ class LoremIpsum
      * Whether or not we should be starting the string with "Lorem ipsum..."
      *
      * @access private
-     * @var    boolean
+     * @var    mixed
      */
     private $first = true;
 
@@ -35,7 +35,7 @@ class LoremIpsum
      * a complete list exists and if so, where to get it.
      *
      * @access private
-     * @var    array
+     * @var    array<string>
      */
     private $words = array(
         // Lorem ipsum...
@@ -83,7 +83,7 @@ class LoremIpsum
      */
     public function word($tags = false)
     {
-        return $this->words(1, $tags);
+        return strval($this->words(1, $tags));
     }
 
     /**
@@ -94,7 +94,7 @@ class LoremIpsum
      * @access public
      * @param  integer $count how many words to generate
      * @param  mixed   $tags string or array of HTML tags to wrap output with
-     * @return array   generated lorem ipsum words
+     * @return mixed  generated lorem ipsum words
      */
     public function wordsArray($count = 1, $tags = false)
     {
@@ -151,7 +151,7 @@ class LoremIpsum
      */
     public function sentence($tags = false)
     {
-        return $this->sentences(1, $tags);
+        return strval($this->sentences(1, $tags));
     }
 
     /**
@@ -162,7 +162,7 @@ class LoremIpsum
      * @access public
      * @param  integer $count how many sentences to generate
      * @param  mixed   $tags string or array of HTML tags to wrap output with
-     * @return array   generated lorem ipsum sentences
+     * @return mixed   generated lorem ipsum sentences
      */
     public function sentencesArray($count = 1, $tags = false)
     {
@@ -204,7 +204,7 @@ class LoremIpsum
      */
     public function paragraph($tags = false)
     {
-        return $this->paragraphs(1, $tags);
+        return strval($this->paragraphs(1, $tags));
     }
 
     /**
@@ -215,15 +215,18 @@ class LoremIpsum
      * @access public
      * @param  integer $count how many paragraphs to generate
      * @param  mixed   $tags string or array of HTML tags to wrap output with
-     * @return array   generated lorem ipsum paragraphs
+     * @return array<string>   generated lorem ipsum paragraphs
      */
     public function paragraphsArray($count = 1, $tags = false)
     {
+        // The $array parameter set to true means an array is returned.
+        // Return type is mixed, we should probably cast to array.
+        // @phpstan-ignore-next-line
         return $this->paragraphs($count, $tags, true);
     }
 
     /**
-     * Paragraphss
+     * Paragraphs
      *
      * Generates paragraphs of lorem ipsum.
      *
@@ -238,10 +241,13 @@ class LoremIpsum
         $paragraphs = array();
 
         for ($i = 0; $i < $count; $i++) {
-            $paragraphs[] = $this->sentences($this->gauss(5.8, 1.93));
+            $paragraphs[] = strval($this->sentences($this->gauss(5.8, 1.93)));
         }
 
-        return $this->output($paragraphs, $tags, $array, "\n\n");
+        if ($array) {
+            return $this->output($paragraphs, $tags, $array, "\n\n");
+        }
+        return strval($this->output($paragraphs, $tags, false, "\n\n"));
     }
 
     /**
@@ -255,7 +261,7 @@ class LoremIpsum
      * @access private
      * @param  double  $mean average value
      * @param  double  $std_dev stadnard deviation
-     * @return double  calculated distribution
+     * @return int  calculated distribution
      */
     private function gauss($mean, $std_dev)
     {
@@ -263,7 +269,7 @@ class LoremIpsum
         $y = mt_rand() / mt_getrandmax();
         $z = sqrt(-2 * log($x)) * cos(2 * pi() * $y);
 
-        return $z * $std_dev + $mean;
+        return intval($z * $std_dev + $mean);
     }
 
     /**
@@ -273,6 +279,7 @@ class LoremIpsum
      * the first time we are generating the text.
      *
      * @access private
+     * @return void
      */
     private function shuffle()
     {
@@ -298,18 +305,19 @@ class LoremIpsum
      * first word of the sentence.
      *
      * @access private
-     * @param  array   $sentences the sentences we would like to punctuate
+     * @param  array<string>   $sentences the sentences we would like to punctuate
+     * @return void
      */
     private function punctuate(&$sentences)
     {
         foreach ($sentences as $key => $sentence) {
-            $words = count($sentence);
+            $words = count($sentences);
 
             // Only worry about commas on sentences longer than 4 words
             if ($words > 4) {
                 $mean    = log($words, 6);
                 $std_dev = $mean / 6;
-                $commas  = round($this->gauss($mean, $std_dev));
+                $commas  = $this->gauss($mean, $std_dev);
 
                 for ($i = 1; $i <= $commas; $i++) {
                     $word = round($i * $words / ($commas + 1));
@@ -333,7 +341,7 @@ class LoremIpsum
      * into a string or not.
      *
      * @access private
-     * @param  array   $strings an array of generated strings
+     * @param  array<string>   $strings an array of generated strings
      * @param  mixed   $tags string or array of HTML tags to wrap output with
      * @param  boolean $array whether an array or a string should be returned
      * @param  string  $delimiter the string to use when calling implode()
@@ -372,4 +380,3 @@ class LoremIpsum
         return $strings;
     }
 }
-
