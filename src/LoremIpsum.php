@@ -312,8 +312,7 @@ class LoremIpsum
     private function punctuate(&$sentences)
     {
         foreach ($sentences as $key => $sentence) {
-            $words = count($sentences);
-
+            $words = count($sentence);
             // Only worry about commas on sentences longer than 4 words
             if ($words > 4) {
                 $mean    = log($words, 6);
