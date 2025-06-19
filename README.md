@@ -1,3 +1,11 @@
+# 301 Moved Permanently
+
+This repository has moved permanently because I'm no longer using GitHub for my personal projects.
+
+The new location of this code is: https://git.sherver.org/joshtronic/php-loremipsum
+
+---
+
 # php-loremipsum
 
 [![License](https://img.shields.io/packagist/l/joshtronic/php-loremipsum?style=for-the-badge)](https://github.com/joshtronic/php-loremipsum/blob/master/LICENSE)
